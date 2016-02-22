@@ -1,0 +1,12 @@
+<section>
+  <h2>{{survey.title}}</h2>
+  <p>{{survey._id}}</p>
+  <ol>
+    <li ng-repeat = "question in survey.questions">
+      {{question.text}}<br>
+      <div ng-repeat = "answer in question.choices">
+        <input type="radio" name="answer"  value = "{{answer.text}}"> {{answer.text}}<br>
+      </div>
+    </li>
+  </ol>
+</section>

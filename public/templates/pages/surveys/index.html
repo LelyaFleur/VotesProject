@@ -1,0 +1,15 @@
+<div ng-controller = "SurveyListController">
+     <h1>Projecte Participació Ciutadana</h1>
+     <button class="btn btn-default" ng-click="showForm = !showForm">{{showForm ? "Cancel" : "Create a Survey"}}</button>
+    <new-survey ng-show="showForm "></new-survey>-->
+    
+	<ul>
+		 <li class="list-group-item" ng-repeat="survey in surveys">
+	  		 <div  >
+	  		 	<a ng-href='#/sur/{{survey._id}}'>{{survey.title}}</a>
+	   			<!-- <a ng-click="show = !show; $event.preventDefault(); $event.stopPropagation();" >{{survey.title}}</a>	   			 
+	    		<survey-preview ng-show="show"></survey-preview>-->
+	  		 </div>
+		</li>
+	</ul>
+</div>

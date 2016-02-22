@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="citizenParticipationProject" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="citizenParticipationProject" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="citizenParticipationProject" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="VotesProject" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Projecte Participació Ciutadana</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+
+  <body>
+    <h1>Projecte Participació Ciutadana</h1>
+    <div id="surveyWrapper">
+        <div ng-view></div>
+    </div>
+
+
+    <script src="/javascript/bower_components/angular/angular.js"></script>
+    <script src="/javascript/bower_components/angular-route/angular-route.js"></script>
+    <script src="/javascript/app.js"></script>
+    <script src="/javascript/routes.js"></script>
+
+    <!-- Directives -->
+    <script src="/javascript/directives/survey-preview.js"></script>
+    <script src="/javascript/directives/new-survey.js"></script>  
+  
+
+    <!-- Controllers -->
+    <script src="/javascript/controllers/survey-list-controller.js"></script>
+    <script src="/javascript/controllers/surveys-show-controller.js"></script>
+         
+  </body>
+
+</html>
