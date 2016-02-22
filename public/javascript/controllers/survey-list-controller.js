@@ -1,5 +1,4 @@
 angular.module('VotesProject').controller('SurveyListController', function($scope, Survey){
-		$scope.formData = {};
 		$scope.showForm = false;
 		$scope.selectedSurvey = undefined;
 
@@ -12,6 +11,18 @@ angular.module('VotesProject').controller('SurveyListController', function($scop
 	        .error(function(data) {
 	            console.log('Error: ' + data);
 	        });
+
+	    $scope.removeSurvey = function(survey){
+
+	    	Survey.delete(survey._id)
+	        .success(function(data) {
+	            $scope.surveys = data;
+	            console.log(data);
+	        })
+	        .error(function(data) {
+	            console.log('Error: ' + data);
+	        });   
+	    }; 
 
 	     $scope.selectSurvey = function(survey) {
 		    $scope.selectedSurvey = survey;

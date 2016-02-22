@@ -60,28 +60,33 @@
         survey.save(function(err) {
             if (err)
                 res.send(err);
-
-            res.json({ message: 'Survey created!' });
+            
+            Survey.find(function(err, surveys) {
+                if (err)
+                    res.send(err)
+                res.json(surveys);
+            });
+            //res.json({ message: 'Survey created!' });
         });
 
     });
 
- /*   // delete a todo
-    app.delete('/api/todos/:todo_id', function(req, res) {
-        Todo.remove({
-            _id : req.params.todo_id
-        }, function(err, todo) {
+    // delete a survey
+    app.delete('/api/surveys/:id', function(req, res) {
+        Survey.remove({
+            _id : req.params.id
+        }, function(err, survey) {
             if (err)
                 res.send(err);
-
-            // get and return all the todos after you create another
-            Todo.find(function(err, todos) {
+           // res.json({ message: 'Successfully deleted' });
+            // get and return all the surveys after you delete another
+            Survey.find(function(err, surveys) {
                 if (err)
                     res.send(err)
-                res.json(todos);
+                res.json(surveys);
             });
         });
-    });*/
+    });
 
      // application -------------------------------------------------------------
     app.get('*', function(req, res) {

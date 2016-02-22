@@ -5,13 +5,17 @@ angular.module('VotesProject').
  			return $http({method: 'GET', url: "/api/surveys"})
  		},
  		find: function(id){
- 			return $http({method: 'GET', url: "/api/surveys" + id});
+ 			return $http({method: 'GET', url: "/api/surveys/" + id});
  		},
  		update: function(surveyObj) {
       		return $http({method: 'PUT', url: '/api/surveys', data: surveyObj});
     	},
  		create: function(surveyObj){
  			return $http({method: 'POST', url: "/api/surveys", data: surveyObj});
- 		}
+ 		},
+ 		delete: function(id) {
+      		return  $http({method: 'DELETE', url: "/api/surveys/" + id});
+    	}
+     
  	};
  }]);

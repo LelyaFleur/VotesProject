@@ -1,10 +1,16 @@
 <div ng-controller = "SurveyListController">
+	<a href="#/surveys" class="btn btn-default" role="button">
+			<span class="glyphicon glyphicon-arrow-left"></span>
+			Back to Poll List
+	</a>
+	<button id = "createBtn" ng-click="showForm = !showForm">{{showForm ? "Cancel" : "Create a Survey"}}</button>
+	<new-survey ng-show="showForm "></new-survey>
     <div id = "adminList">
     	<h3>Llista de consultes</h3>
 		<ul class="list-group">
 			 <li class="list-group-item" ng-repeat="survey in surveys">
 		  		 <div  >
-		  		 	<a ng-click="show = !show; selectSurvey(survey); $event.preventDefault(); $event.stopPropagation();" >{{survey.title}}</a>	
+		  		 	<a ng-click="show = !show; selectSurvey(survey); $event.preventDefault(); $event.stopPropagation();" >{{survey.title}}</a><button id = "removeBtn" ng-click = "removeSurvey(survey)">x</button>	
 		  		 	<div ng-if="selectedSurvey === survey">
 	      				<survey-preview ng-show = "show" survey="selectedSurvey"></survey-preview>
 	     			</div> 
@@ -12,6 +18,4 @@
 			</li>
 		</ul>
 	</div>
-	<button id = "createBtn" ng-click="showForm = !showForm">{{showForm ? "Cancel" : "Create a Survey"}}</button>
-	<new-survey ng-show="showForm "></new-survey>
 </div>
