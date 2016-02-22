@@ -11,10 +11,15 @@ angular.module('VotesProject').config(['$routeProvider', function($routeProvider
       controller: 'SurveyListController'
     })
 
-    .when('/sur/:id', {
+    .when('/surveys/:id', {
   		templateUrl: 'templates/pages/surveys/show.html',
   		controller: 'SurveysShowController'
-	})
+	  })
+
+    .when('/admin', {
+      templateUrl: 'templates/pages/admin/index.html',
+      controller: 'SurveyListController'
+    })
 
     .otherwise({redirectTo: '/'});
 }]);

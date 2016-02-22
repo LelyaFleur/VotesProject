@@ -1,9 +1,10 @@
-angular.module('VotesProject').controller('SurveyListController', function($scope, $http){
+angular.module('VotesProject').controller('SurveyListController', function($scope, Survey){
 		$scope.formData = {};
 		$scope.showForm = false;
+		$scope.selectedSurvey = undefined;
 
 	    // when landing on the page, get all surveys and show them
-	    $http.get('/api/surveys')
+	    Survey.all()
 	        .success(function(data) {
 	            $scope.surveys = data;
 	            console.log(data);
@@ -11,4 +12,8 @@ angular.module('VotesProject').controller('SurveyListController', function($scop
 	        .error(function(data) {
 	            console.log('Error: ' + data);
 	        });
+
+	     $scope.selectSurvey = function(survey) {
+		    $scope.selectedSurvey = survey;
+    	};     
 	});

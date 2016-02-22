@@ -1,35 +1,35 @@
-<form name = "surveyForm" ng-submit = "surveyForm.$valid && addSurvey(surveys)" novalidate>
+<div id = "newSurvey">
+	<form name = "surveyForm" ng-submit = "surveyForm.$valid && newSurveyCtrl.addSurvey(surveys)" novalidate>
 	<!--<blockquote>
 		<b>Title: {{newSurveyCtrl.survey.title}}</b>
 	</blockquote>-->
-	<input ng-model = "survey.title" type = "text" placeholder = "Formulari sense títol" class = "title" required/>
-	
-	
-	<div ng-repeat="question in survey.questions">
-		<input type="text" ng-model="question.text" class="question" placeholder="Pregunta sense titol">
-		<br>
-		<div ng-repeat = "answer in question.choices track by $index">
-    		<input type="radio" name="answer"  value = "{{answer.text}}"> 
-    		<input type="text" ng-model="answer.text" placeholder="Opció {{$index+1}}">
-  		</div>
+		<input ng-model = "newSurveyCtrl.survey.title" type = "text" placeholder = "Formulari sense títol" class = "title" required/>		
+		
+		<div ng-repeat="question in newSurveyCtrl.survey.questions">
+			<input type="text" ng-model="question.text" class="question" placeholder="Pregunta sense titol">
+			<br>
+			<div ng-repeat = "answer in question.choices track by $index">
+	    		<input type="radio" name="answer"  value = "{{answer.text}}"> 
+	    		<input type="text" ng-model="answer.text" placeholder="Opció {{$index+1}}">
+	  		</div>
 
+			<div class="row">
+				<div class="col-xs-12">
+					<button type="button" class="btn btn-default" ng-click="newSurveyCtrl.addChoice(question.choices)">
+						<span></span>afegiu una altra opció
+					</button>
+				</div>
+			</div>
+	  	</div>	
+	
 		<div class="row">
 			<div class="col-xs-12">
-				<button type="button" class="btn btn-default" ng-click="addChoice(question.choices)">
-					<span></span>afegiu una altra opció
+				<button type="button" class="btn btn-default" ng-click="newSurveyCtrl.addQuestion()">
+					<span></span>Add another
 				</button>
 			</div>
 		</div>
-  	</div>
-	
-	
-	<div class="row">
-		<div class="col-xs-12">
-			<button type="button" class="btn btn-default" ng-click="addQuestion()">
-				<span></span>Add another
-			</button>
-		</div>
-	</div>
-	<div>surveyForm is {{surveyForm.$valid}}</div>
-	<input type = "submit" value = "Submit"/>
-</form>
+		<div>surveyForm is {{surveyForm.$valid}}</div>
+			<input type = "submit" value = "Submit"/>
+	</form>
+</div>

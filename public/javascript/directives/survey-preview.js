@@ -3,6 +3,9 @@ angular.module('VotesProject')
 	    return {
 	      restrict: 'E',
 	      templateUrl: '/templates/directives/survey-preview.html',
-	      replace: true
+	      replace: true,
+	      scope: {
+	      	survey: "="
+	      }
 	    }
 	})

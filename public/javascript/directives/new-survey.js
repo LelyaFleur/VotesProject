@@ -1,4 +1,4 @@
-angular.module('VotesProject').directive('newSurvey', function($http){
+angular.module('VotesProject').directive('newSurvey', function(Survey){
 	return{
 		restrict: 'E',
 		templateUrl: '/templates/directives/new-survey.html',
@@ -20,7 +20,7 @@ angular.module('VotesProject').directive('newSurvey', function($http){
 			this.addSurvey = function(surveys){
 				surveys.push(this.survey);
 
-				$http.post('/api/surveys', this.survey)
+				Survey.create(this.survey)
             		.success(function(data) {
               			$scope.formData = {}; // clear the form so our user is ready to enter another
                 		$scope.surveys = data;
