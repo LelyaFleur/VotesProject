@@ -1,7 +1,7 @@
 angular.module('VotesProject').controller('SurveyListController', function($scope, Survey){
 		$scope.showForm = false;
-		$scope.selectedSurvey = undefined;
-
+		$scope.selectedSurvey = undefined
+		
 	    // when landing on the page, get all surveys and show them
 	    Survey.all()
 	        .success(function(data) {
@@ -24,7 +24,7 @@ angular.module('VotesProject').controller('SurveyListController', function($scop
 	        });   
 	    }; 
 
-	     $scope.selectSurvey = function(survey) {
+	    $scope.selectSurvey = function(survey) {
 		    $scope.selectedSurvey = survey;
-    	};     
+    	};    	   
 	});

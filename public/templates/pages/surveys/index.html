@@ -1,11 +1,11 @@
-<div id = "usersList" ng-controller = "SurveyListController">
+<div>
 	<h3>Llista de consultes</h3>
 		<ul class="list-group">
 		 <li class="list-group-item" ng-repeat="survey in surveys">
 	  		 <div  >
 	  		 	<a ng-click="show = !show; selectSurvey(survey); $event.preventDefault(); $event.stopPropagation();" >{{survey.title}}</a>	
 	  		 	<div ng-if="selectedSurvey === survey">
-	  				<survey-preview ng-show = "show" survey="selectedSurvey"></survey-preview>
+	  				<survey-preview ng-show = "show" survey="selectedSurvey" ></survey-preview>
 	 			</div>  
 	  		 	<!--<a ng-href='#/sur/{{survey._id}}'>{{survey.title}}</a>
 	   			<a ng-click="show = !show; $event.preventDefault(); $event.stopPropagation();" >{{survey.title}}</a>	   			 

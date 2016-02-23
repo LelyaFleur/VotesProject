@@ -1,10 +1,19 @@
 <section>
-   <ol>
-    <li ng-repeat = "question in survey.questions">
-      {{question.text}}<br>
-      <div ng-repeat = "answer in question.choices">
-        <input type="radio" name="answer"  value = "{{answer.text}}"> {{answer.text}}<br>
-      </div>
-    </li>
-  </ol>
+	<div class = "row">
+		<div class="col-md-6">
+		   <ol>
+			    <li ng-repeat = "question in survey.questions" ng-init = "number = $index">
+			      {{question.text}}<br>
+			      <div ng-repeat = "answer in question.choices">
+			        <input type="radio" name="answer{{number+1}}"  value = "{{answer.text}}" ng-disabled="!participation"> {{answer.text}}<br>
+			      </div>
+			    </li>
+			</ol>
+		</div>
+		<div class="col-md-3 col-md-offset-3">
+			<div>
+				<button class = "btn btn-info" ng-click="participation=true; showPopup();">Participar</button>
+			</div>
+		</div>
+	</div>
 </section>

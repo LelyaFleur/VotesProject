@@ -1,1 +1,1 @@
-angular.module('VotesProject', ['ngRoute']);
+angular.module('VotesProject', ['ngRoute', 'angularModalService']);

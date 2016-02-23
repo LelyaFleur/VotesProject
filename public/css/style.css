@@ -1,16 +1,12 @@
 /* app css stylesheet */
 
-#container {
- margin-left: 100px;
-}
-
 .question{
   margin-top:20px;
    font-size: 16px;
 }
 
 .title{
-  margin-top:50px;
+  margin-top: 20px;
   font-size: 24px;
 }
 
@@ -40,8 +36,6 @@ h1 {
 }
 
 #newSurvey {
-  margin-left: 50px;
-  width: 45%;
   border-width:2px; 
   border-style:solid;
   border-color: #CAC7C7;
