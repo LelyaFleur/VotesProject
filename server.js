@@ -25,7 +25,7 @@
     app.get('/api/surveys', function(req, res) {
 
         // use mongoose to get all surveys in the database
-        Survey.find(function(err, surveys) {
+        Survey.find(null, {submissions: 0}, function(err, surveys) {
             console.log(surveys);
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
@@ -36,9 +36,9 @@
     });
 
     // get survey by id
-    app.get('/api/sur/:id', function(req, res) {
+    app.get('/api/surveys/:id', function(req, res) {
         var surveyId = req.params.id;
-        Survey.findById(surveyId, function(err, survey) {
+        Survey.findById(surveyId, {submissions: 0}, function(err, survey) {
           if (err) 
             res.send(err)
 
@@ -49,7 +49,28 @@
 
     });
 
-    // create suvey 
+    //find if a person with a current dni has participated in a current survey
+    app.get('/api/surveys/:id/:dni', function(req, res) {
+        var surveyId = req.params.id;
+        var surveyDNI = req.params.dni;
+        console.log("Survey id is:" + surveyId);
+        Survey.find({_id: surveyId, submissions: {$elemMatch: {dni : surveyDNI}}}, function(err, survey) {
+          
+          if (err) 
+            res.send(err)
+          if(survey.length > 0){
+            console.log(survey);
+            res.send(true);
+          }else{
+            console.log(survey);
+            res.send(false);
+          }
+            
+        });
+
+    });
+
+    // create survey 
     app.post('/api/surveys', function(req, res) {
         
         var survey = new Survey(req.body);      // create a new instance of the Survey model

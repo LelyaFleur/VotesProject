@@ -7,6 +7,9 @@ angular.module('VotesProject').
  		find: function(id){
  			return $http({method: 'GET', url: "/api/surveys/" + id});
  		},
+ 		validateDNI: function(id, dni){
+ 			return $http({method: 'GET', url: "/api/surveys/" + id + "/" + dni});
+ 		},
  		update: function(surveyObj) {
       		return $http({method: 'PUT', url: '/api/surveys', data: surveyObj});
     	},

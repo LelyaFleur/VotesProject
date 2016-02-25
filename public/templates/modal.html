@@ -3,15 +3,28 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Yes or No?</h4>
+            <h4 class="modal-title">Introdueixi el seu DNI si us plau</h4>
           </div>
           <div class="modal-body">
-            <p>It's your call...</p>
+            <form name="dniForm" class="form-horizontal" role="form">
+              <label>DNI:
+                <input type = "text" class="form-control" placeholder = "Introdueixi el seu DNI" ng-model="DNI" ng-maxlength="10"/>
+              </label>
+              <label>Email:
+                <input type="email" class="form-control" name="input" ng-model="email.text" required>
+              </label>
+              <div role="alert">
+                <span class="error" ng-show="dniForm.input.$error.required">
+                  Required!</span>
+                <span class="error" ng-show="dniForm.input.$error.email">
+                  Not valid email!</span>
+              </div>
+            </form>            
           </div>
           <div class="modal-footer">
-            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
-            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+             <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">OK</button>
+            <button type="button" ng-click="cancel()" class="btn">Cancel</button>
           </div>
         </div>
-      </div>
- </div>
+    </div>
+</div>
