@@ -1,0 +1,17 @@
+<section>
+	
+					
+		   <ol>
+			    <li ng-repeat = "question in survey.questions">
+			      {{question.text}}<br>
+			      <div ng-repeat = "answer in question.choices">
+			      	<div class= "row">
+				      	<div class="col-md-6">{{answer.text}}</div>
+				      	<div class="col-md-4 col-md-offset-2">{{answer.votes}}</div>
+			     	</div>
+			      </div>
+			    </li>
+			</ol>
+		
+	
+</section>

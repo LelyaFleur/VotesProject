@@ -35,6 +35,20 @@
         });
     });
 
+    // get all surveys with votes
+    app.get('/api/admin', function(req, res) {
+
+        // use mongoose to get all surveys in the database
+        Survey.find(null, {submissions: 0}, function(err, surveys) {
+            console.log(surveys);
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err)
+
+            res.json(surveys); // return all surveys in JSON format
+        });
+    });
+
     // get survey by id
     app.get('/api/surveys/:id', function(req, res) {
         var surveyId = req.params.id;
@@ -97,7 +111,8 @@
             }else{
                 res.json({ message: 'Did not update!' });
             }
-        });        
+        });   
+             
       
         
        /* */

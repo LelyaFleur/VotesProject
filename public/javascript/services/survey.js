@@ -2,7 +2,10 @@ angular.module('VotesProject').
  factory('Survey', ['$http', function SurveyFactory($http){
  	return {
  		all: function(){
- 			return $http({method: 'GET', url: "/api/surveys"})
+ 			return $http({method: 'GET', url: "/api/surveys"});
+ 		},
+ 		allSurveysWithResults: function(){
+			return $http({method: 'GET', url: "/api/admin"});
  		},
  		find: function(id){
  			return $http({method: 'GET', url: "/api/surveys/" + id});

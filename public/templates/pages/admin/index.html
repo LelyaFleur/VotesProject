@@ -1,4 +1,4 @@
-<div class = "row">
+<div class = "row" ng-controller = "SurveyResultsController">
 	<div class="col-md-6">
 		<a href="#/surveys" class="btn btn-info" role="button">Tornar</a>
 		<button id = "createBtn" ng-click="showForm = !showForm">{{showForm ? "Cancel" : "Create a Survey"}}</button>
@@ -11,7 +11,7 @@
 		  		 <div  >
 		  		 	<a ng-click="show = !show; selectSurvey(survey); $event.preventDefault(); $event.stopPropagation();" >{{survey.title}}</a><button id = "removeBtn" ng-click = "removeSurvey(survey)">x</button>	
 		  		 	<div ng-if="selectedSurvey === survey">
-	      				<survey-preview ng-show = "show" survey="selectedSurvey" ></survey-preview>
+	      				<survey-results ng-show = "show" survey="selectedSurvey" ></survey-results>
 	     			</div> 
 		  		 </div>
 			</li>

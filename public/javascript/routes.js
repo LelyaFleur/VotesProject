@@ -18,7 +18,7 @@ angular.module('VotesProject').config(['$routeProvider', function($routeProvider
 
     .when('/admin', {
       templateUrl: 'templates/pages/admin/index.html',
-      controller: 'SurveyListController'
+      controller: 'SurveyResultsController'
     })
 
     .otherwise({redirectTo: '/'});

@@ -34,33 +34,8 @@ angular.module('VotesProject').controller('SurveyController',function($scope, Mo
 	            templateUrl: '/templates/modal.html',
 	            controller: function($scope, close, $element) {
 	            			$scope.word = /^[XYZ]?\d{5,8}[A-Z]$/;
-	            			$scope.isDNI = function isDNI(dni) {
-								var numero, let, letra;
-								var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
-							 
-								dni = dni.toUpperCase();
-							 
-								if(expresion_regular_dni.test(dni) === true){
-									numero = dni.substr(0,dni.length-1);
-									numero = numero.replace('X', 0);
-									numero = numero.replace('Y', 1);
-									numero = numero.replace('Z', 2);
-									let = dni.substr(dni.length-1, 1);
-									numero = numero % 23;
-									letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
-									letra = letra.substring(numero, numero+1);
-									if (letra != let) {
-										//alert('Dni erroneo, la letra del NIF no se corresponde');
-										return false;
-									}else{
-										//alert('Dni correcto');
-										return true;
-									}
-								}else{
-									//alert('Dni erroneo, formato no válido');
-									return false;
-								}
-							}
+
+	            			
  							//  This close function doesn't need to use jQuery or bootstrap, because
 							  //  the button has the 'data-dismiss' attribute.
 							  $scope.close = function() {
@@ -85,7 +60,37 @@ angular.module('VotesProject').controller('SurveyController',function($scope, Mo
 	        }).then(function(modal) {
 		            modal.element.modal();
 		            modal.close.then(function(result) {
-		            	Survey.validateDNI($scope.survey._id, result.DNI)
+
+						var isDNI = function (dni) {
+							var number, let, letter;
+							var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+						 
+							dni = dni.toUpperCase();
+						 
+							if(expresion_regular_dni.test(dni) === true){
+								number = dni.substr(0,dni.length-1);
+								number = number.replace('X', 0);
+								number = number.replace('Y', 1);
+								number = number.replace('Z', 2);
+								let = dni.substr(dni.length-1, 1);
+								number = number % 23;
+								letter = 'TRWAGMYFPDXBNJZSQVHLCKET';
+								letter = letter.substring(number, number+1);
+								if (letter != let) {
+									console.log('Dni erroneo, la letra del NIF no se corresponde');
+									return false;
+								}else{
+									console.log('Dni correcto');
+									return true;
+								}
+							}else{
+								console.log('Dni erroneo, formato no válido');
+								return false;
+							}
+						};
+
+		            	if(isDNI(result.DNI)){
+		            		Survey.validateDNI($scope.survey._id, result.DNI)
 		            		.success(function(data) {
 	           					 if(data){
 	           					 	console.log(data);
@@ -102,6 +107,11 @@ angular.module('VotesProject').controller('SurveyController',function($scope, Mo
 					        .error(function(data) {
 					            console.log('Error: ' + data);
 					        });
+		            	}else{
+		            		$scope.message = "Your DNI is not valid, sorry";
+		            		$scope.participation = false;
+		            	}
+		            	
 		            });
 	        	});
     		};   
