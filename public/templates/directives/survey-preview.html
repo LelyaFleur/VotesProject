@@ -1,14 +1,19 @@
 <section>
 	<div class = "row">
 		<div class="col-md-6">
-		   <ol>
-			    <li ng-repeat = "question in survey.questions" ng-init = "number = $index">
-			      {{question.text}}<br>
-			      <div ng-repeat = "answer in question.choices">
-			        <input type="radio" name="answer{{number+1}}"  value = "{{answer.text}}" ng-disabled="!participation"> {{answer.text}}<br>
-			      </div>
-			    </li>
-			</ol>
+			<form name = "surveyForm" ng-submit = "sendSurvey()" novalidate>
+			   <ol>
+				    <li ng-repeat = "question in survey.questions" ng-init = "number = $index">
+				      {{question.text}}<br>
+				      <div ng-repeat = "answer in question.choices">
+				        <input type="radio" name="answer{{number+1}}"  ng-value = "answer._id" ng-disabled="!participation" ng-model = "answers[number]"> {{answer.text}}<br>
+				      </div>
+				    </li>
+				</ol>
+				<div class="col-md-2 col-md-offset-10" ng-show = "participation">
+					<input type = "submit" class="btn btn-info" value = "Enviar"/>
+				</div>
+		    </form>
 		</div>
 		<div class="col-md-3 col-md-offset-3">
 			<div>

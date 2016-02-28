@@ -6,23 +6,46 @@
             <h4 class="modal-title">Introdueixi el seu DNI si us plau</h4>
           </div>
           <div class="modal-body">
-            <form name="dniForm" class="form-horizontal" role="form">
-              <label>DNI:
-                <input type = "text" class="form-control" placeholder = "Introdueixi el seu DNI" ng-model="DNI" ng-maxlength="10"/>
-              </label>
-              <label>Email:
-                <input type="email" class="form-control" name="input" ng-model="email.text" required>
-              </label>
-              <div role="alert">
-                <span class="error" ng-show="dniForm.input.$error.required">
-                  Required!</span>
-                <span class="error" ng-show="dniForm.input.$error.email">
-                  Not valid email!</span>
-              </div>
-            </form>            
+            <form name="dniForm" ng-submit = "dniForm.$valid" novalidate>
+    
+                <div class="form-group" ng-class="{ 'has-error': dniForm.DNI.$touched && dniForm.DNI.$invalid }">
+                  <label>DNI:</label>
+                  <input type="text" name="DNI" class="form-control" 
+                    ng-model="DNI"
+                    ng-minlength="9" 
+                    ng-maxlength="9"       
+                    ng-pattern = "word"
+                    required>
+                    
+                  <div class="help-block" ng-messages="dniForm.DNI.$error" ng-if="dniForm.DNI.$touched">
+                    <p ng-message="minlength">DNI must have at least 9 characters.</p>
+                    <p ng-message="maxlength">DNI is too long.</p>
+                    <p ng-message="pattern">Your dni is not correct.</p>
+                    <p ng-message="required">Your name is required.</p>
+                  </div>
+                </div>
+                
+                <div class="form-group" ng-class="{ 'has-error': dniForm.email.$touched && dniForm.email.$invalid }">
+                  <label>Email</label>
+                  <input type="email" name="email" class="form-control" 
+                    ng-model="email"
+                    ng-minlength="5"
+                    ng-maxlength="100"
+                    required>
+                    
+                  <div class="help-block" ng-messages="dniForm.email.$error" ng-if="dniForm.email.$touched">
+                    <div ng-messages-include="templates/messages.html"></div>
+                  </div>
+                  
+                </div>
+            
+          </form>
+          
+          <pre>dniForm.DNI.$error = {{ dniForm.DNI.$error | json }}</pre>
+
           </div>
           <div class="modal-footer">
-             <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">OK</button>
+             <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal" ng-disabled = "!dniForm.$valid">OK</button>
             <button type="button" ng-click="cancel()" class="btn">Cancel</button>
           </div>
         </div>

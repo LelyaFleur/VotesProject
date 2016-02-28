@@ -25,7 +25,7 @@
     app.get('/api/surveys', function(req, res) {
 
         // use mongoose to get all surveys in the database
-        Survey.find(null, {submissions: 0}, function(err, surveys) {
+        Survey.find(null, {submissions: 0, votes: 0}, function(err, surveys) {
             console.log(surveys);
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
@@ -38,7 +38,7 @@
     // get survey by id
     app.get('/api/surveys/:id', function(req, res) {
         var surveyId = req.params.id;
-        Survey.findById(surveyId, {submissions: 0}, function(err, survey) {
+        Survey.findById(surveyId, {submissions: 0, votes:0}, function(err, survey) {
           if (err) 
             res.send(err)
 
@@ -56,8 +56,7 @@
         console.log("Survey id is:" + surveyId);
         Survey.find({_id: surveyId, submissions: {$elemMatch: {dni : surveyDNI}}}, function(err, survey) {
           
-          if (err) 
-            res.send(err)
+          if (err) res.send(err);
           if(survey.length > 0){
             console.log(survey);
             res.send(true);
@@ -68,6 +67,56 @@
             
         });
 
+    });
+
+    // update survey 
+    
+
+    app.put('/api/surveys/:id/:dni', function(req, res) {
+        console.log(req.body);
+        var id = req.params.id;
+        var dni = req.params.dni;
+        var submissions = req.body;
+        Survey.update({_id: id}, {'$addToSet' : {'submissions': {'dni': dni}}}).exec(function( err, data ){
+            if(err) console.log(err);
+            console.log("update: " + data);
+            if(data){
+               Survey.findOne({ _id: id }, function (err, doc){ 
+                   if(err) console.log(err);
+                   console.log("doc:" + doc);
+                   for(var submission in submissions){
+                        var qId = submissions[submission].questionId;
+                        var aId = submissions[submission].answerId;
+                        console.log("questionId." + qId);
+                        console.log("choiceId." + aId);
+                        doc.questions.id(qId).choices.id(aId).votes += 1;
+                    };
+                    doc.save();
+                }); 
+                res.json({ message: 'Updated!' });
+            }else{
+                res.json({ message: 'Did not update!' });
+            }
+        });        
+      
+        
+       /* */
+         /* for(var i in submissions){
+            Survey.update({_id: id, questions: {$elemMatch: {_id : submissions[i].questionId}}, choices: {$elemMatch: {_id : submissions[i].answerId}}  , 'choices._id' : submissions[i].answerId},
+                   {'$inc': {'questions.$.choices.$.votes': 1}}{'$set': {'questions.$.text' : "blabla"}},
+                    function(err, data) { 
+                        if(err) console.log(err);
+
+                        console.log(data);
+                     }
+            );
+        }
+       /* Meetings.update(
+           { _id: meetingId },
+           { $addToSet: { messages: 'hey there' } }
+)*/
+        
+        
     });
 
     // create survey 

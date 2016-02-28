@@ -1,1 +1,1 @@
-angular.module('VotesProject', ['ngRoute', 'angularModalService']);
+angular.module('VotesProject', ['ngRoute', 'angularModalService','ngMessages']);

@@ -2,13 +2,11 @@
 var mongoose = require('mongoose');
 //var voteSchema = new mongoose.Schema({ ip: 'String' });
 var choiceSchema = new mongoose.Schema({ 
-	_id:false,
-	text: String//,
-	//votes: [voteSchema]
+	text: String,
+	votes: Number
 });
 
 var questionSchema = new mongoose.Schema({
-	_id:false,
 	text: { type: String, required: true },
  	choices: [choiceSchema]
 });
@@ -26,4 +24,6 @@ var SurveySchema = new mongoose.Schema({
 });
 
 // return the model
+
 module.exports = mongoose.model('Survey', SurveySchema);
+

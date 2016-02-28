@@ -6,15 +6,15 @@ angular.module('VotesProject').directive('newSurvey', function(){
         
         this.survey = { title: '',
                       questions: [{text: '',
-                                      choices: [{text:''}]}
+                                      choices: [{text:'', votes: 0}]}
                        ]};  
 
               this.addQuestion = function(){
-                this.survey.questions.push({text: '', choices: [{text:''}]});
+                this.survey.questions.push({text: '', choices: [{text:'',votes: 0}]});
               };  
 
               this.addChoice = function(choices){
-                choices.push({text:''});
+                choices.push({text:'', votes: 0});
               } 
 
         this.addSurvey = function(surveys){
@@ -33,7 +33,7 @@ angular.module('VotesProject').directive('newSurvey', function(){
 
           this.survey = { title: '',
                         questions: [{text: '',
-                                           choices: [{text:''}]}
+                                           choices: [{text:'', votes: 0}]}
                         ]}; 
         };
       },

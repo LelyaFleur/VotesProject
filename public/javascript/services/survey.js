@@ -10,8 +10,8 @@ angular.module('VotesProject').
  		validateDNI: function(id, dni){
  			return $http({method: 'GET', url: "/api/surveys/" + id + "/" + dni});
  		},
- 		update: function(surveyObj) {
-      		return $http({method: 'PUT', url: '/api/surveys', data: surveyObj});
+ 		update: function(id, dni, surveyObj) {
+      		return $http({method: 'PUT', url: "/api/surveys/"+ id + "/" + dni, data: surveyObj});
     	},
  		create: function(surveyObj){
  			return $http({method: 'POST', url: "/api/surveys", data: surveyObj});
