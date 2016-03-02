@@ -1,9 +1,10 @@
-angular.module('VotesProject').controller('SurveyController',function($scope, ModalService, Survey){
+angular.module('VotesProject').controller('SurveyController',
+
+	function($scope, ModalService, Survey){
 	      	
 	      	$scope.participation = false;
 	      	$scope.DNI = undefined;
 	      	$scope.answers = {};
-	      	
 
 	      	$scope.sendSurvey = function() {
 	      		var submission = [];
@@ -52,68 +53,35 @@ angular.module('VotesProject').controller('SurveyController',function($scope, Mo
 							    $element.modal('hide');
 							    
 							    //  Now call close, returning control to the caller.
-							    close({
+							   /* close({
 							      DNI: $scope.DNI      
-							    }, 500); // close, but give 500ms for bootstrap to animate
+							    }, 500); // close, but give 500ms for bootstrap to animate*/
 							  };
 				}
 	        }).then(function(modal) {
 		            modal.element.modal();
 		            modal.close.then(function(result) {
-
-						var isDNI = function (dni) {
-							var number, let, letter;
-							var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
-						 
-							dni = dni.toUpperCase();
-						 
-							if(expresion_regular_dni.test(dni) === true){
-								number = dni.substr(0,dni.length-1);
-								number = number.replace('X', 0);
-								number = number.replace('Y', 1);
-								number = number.replace('Z', 2);
-								let = dni.substr(dni.length-1, 1);
-								number = number % 23;
-								letter = 'TRWAGMYFPDXBNJZSQVHLCKET';
-								letter = letter.substring(number, number+1);
-								if (letter != let) {
-									console.log('Dni erroneo, la letra del NIF no se corresponde');
-									return false;
-								}else{
-									console.log('Dni correcto');
-									return true;
-								}
-							}else{
-								console.log('Dni erroneo, formato no válido');
-								return false;
-							}
-						};
-
-		            	if(isDNI(result.DNI)){
-		            		Survey.validateDNI($scope.survey._id, result.DNI)
-		            		.success(function(data) {
-	           					 if(data){
-	           					 	console.log(data);
-	           					 	$scope.message = "You have already paricipated,sorry.";
-	           					 	$scope.participation = false;
-
-	           					 }else{
-	           					 	console.log(data);
-	           					 	$scope.message = "You can vote,ok.";
-	           					 	$scope.DNI = result.DNI;
-	           					 	$scope.participation = true;
-	           					 }
-	        				})
-					        .error(function(data) {
-					            console.log('Error: ' + data);
-					        });
-		            	}else{
-		            		$scope.message = "Your DNI is not valid, sorry";
-		            		$scope.participation = false;
-		            	}
 		            	
-		            });
-	        	});
-    		};   
-	});
+	            		Survey.validateDNI($scope.survey._id, result.DNI)
+	            		.success(function(data) {
+           					 if(data){
+           					 	console.log(data);
+           					 	$scope.message = "You have already paricipated,sorry.";
+           					 	$scope.participation = false;
+
+           					 }else{
+           					 	console.log(data);
+           					 	$scope.message = "You can vote,ok.";
+           					 	$scope.DNI = result.DNI;
+           					 	$scope.participation = true;
+           					 }
+        				})
+				        .error(function(data) {
+				            console.log('Error: ' + data);
+				        });
+		            	
+	            });
+    	});
+	};   
+});
 	    

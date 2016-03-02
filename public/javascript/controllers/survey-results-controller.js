@@ -1,4 +1,5 @@
 angular.module('VotesProject').controller('SurveyResultsController',
+	
 	function($scope, Survey){
 		$scope.showForm = false;
 		$scope.selectedSurvey = undefined

@@ -1,8 +1,8 @@
-angular.module('VotesProject').directive('focusMe', function() {
-   return function(scope, elem, attr) {
-      scope.$on(attr.focusMe, function(e) {
-      	console.log(elem);
-          elem[0].focus();
-      });
-   };
+angular.module('VotesProject').directive('focusMe', function(){
+  return{
+      scope: {focusMe: '='},
+      link: function(scope, element){
+         if(scope.focusMe) element[0].focus();             
+      }
+  };
 });

@@ -13,21 +13,21 @@
                   <input type="text" name="DNI" class="form-control" 
                     ng-model="DNI"
                     ng-minlength="9" 
-                    ng-maxlength="9"       
-                    ng-pattern = "word"
+                    ng-maxlength="10"
+                    dni-validity
                     required>
                     
                   <div class="help-block" ng-messages="dniForm.DNI.$error" ng-if="dniForm.DNI.$touched">
                     <p ng-message="minlength">DNI must have at least 9 characters.</p>
                     <p ng-message="maxlength">DNI is too long.</p>
-                    <p ng-message="pattern">Your dni is not correct.</p>
-                    <p ng-message="required">Your name is required.</p>
+                    <p ng-message="dniValidator">Dni erroneo, formato no válido.</p>
+                    <p ng-message="required">DNI is required.</p>
                   </div>
                 </div>
                 
                 <div class="form-group" ng-class="{ 'has-error': dniForm.email.$touched && dniForm.email.$invalid }">
                   <label>Email</label>
-                  <input type="email" name="email" class="form-control" 
+                  <input type="email" name="email" class="form-control" placeholder = "Opcional"
                     ng-model="email"
                     ng-minlength="5"
                     ng-maxlength="100">
