@@ -2,7 +2,7 @@ angular.module('VotesProject').controller('SurveyResultsController',
 	
 	function($scope, Survey){
 		$scope.showForm = false;
-		$scope.selectedSurvey = undefined
+		$scope.selectedSurvey = undefined;
 		
 	    // when landing on the page, get all surveys and show them
 	    Survey.allSurveysWithResults()
